@@ -189,8 +189,9 @@ function baueWegweiserFuerGeschwisterNr($forenkG) {
     $ergebniS = "";
     foreach (GeschwisterNrVonNr($forenkG) as $gNr) {
         $gname     = $Verweise[$gNr]["Forumname"];
+        $gnameVar  = preg_replace('/\.[a-zA-Z0-9]+$/', '', $gname);  // Endung für Variablenname entfernen
         $gnameLang = $Verweise[$gNr]["ForumnameLang"] ?: $gname;
-        $ergebniS .= "<p style=margin:4px;margin-left:" . $einrueckPt . "pt;>\n ";
+        $ergebniS .= "<p style=margin:4px;margin-left:" . $einrueckPt . "pt;padding-left:1em;text-indent:-1em;>\n ";
 
         $hat_kinder = isset($Verweise[$gNr + 1]) && $Verweise[$gNr + 1]["Tiefe"] > $tiefe;
         $_dateiDa   = file_exists("Dateien/de/$gname")
@@ -203,7 +204,7 @@ function baueWegweiserFuerGeschwisterNr($forenkG) {
         $Farbe2 = $_dateiDa ? "" : "</span>";
         $href   = "/" . vollerPfad($gNr);
 
-        $ergebniS .= "     <a href=$href  \$Stil$gname> $Farbe1 $gnameLang $Farbe2 </a></p> \$Ww$gname\n";
+        $ergebniS .= "     <a href=$href  \$Stil$gnameVar> $Farbe1 $gnameLang $Farbe2 </a></p> \$Ww$gnameVar\n";
     }
     return $ergebniS;
 }
@@ -254,12 +255,13 @@ function baueWegweiserFuerGeschwister($name)  {       ///    liefert eine Geschw
 	$ergebniS = "";
 	$tiefe = $Verweise[$VerweiseNummern[$name]]["Tiefe"]-1;   //    minus eins, nicht so dulle eingerückt 
   foreach (GeschwisterNamen($name) as $gnr => $gname) {
-	  //   $gname     = $Verweise[$gnr]["Forumname"]; 
+	  //   $gname     = $Verweise[$gnr]["Forumname"];
 		$gNr = $VerweiseNummern[$gname];
+		$gnameVar = preg_replace('/\.[a-zA-Z0-9]+$/', '', $gname);
     //**/  Echonn("\n(bWfG) (2) gname: $gname;   gNr:  $gNr";
-	  $gnameLang = $Verweise[$gNr]["ForumnameLang"] ? $Verweise[$gNr]["ForumnameLang"] : $Verweise[$gNr]["Forumname"];; 
+	  $gnameLang = $Verweise[$gNr]["ForumnameLang"] ? $Verweise[$gNr]["ForumnameLang"] : $Verweise[$gNr]["Forumname"];;
 	  ##     $gnameLang = "<span style ............ >";
-    $ergebniS .= "<p style=margin:4px;margin-left:" . 18 * $tiefe . "pt;>\n ";             // Dies ist die Einrückung
+    $ergebniS .= "<p style=margin:4px;margin-left:" . 18 * $tiefe . "pt;padding-left:1em;text-indent:-1em;>\n ";             // Dies ist die Einrückung
 		$_gNr = $VerweiseNummern[$gname] ?? -1;
 		$_hatKinder = $_gNr >= 0 && isset($Verweise[$_gNr+1])
 		           && $Verweise[$_gNr+1]["Tiefe"] > $Verweise[$_gNr]["Tiefe"];
@@ -271,7 +273,7 @@ function baueWegweiserFuerGeschwister($name)  {       ///    liefert eine Geschw
 		         || $_hatKinder;
 		$Farbe1 = $_dateiDa ?  "" : "<span style=color:#999>";
 		$Farbe2 = $_dateiDa ?  "" : "</span>";
-    $ergebniS .= "     <a href=/$gname  \$Stil$gname> $Farbe1 $gnameLang $Farbe2 </a></p> \$Ww$gname\n";    // Dies ist die weitere Weiserzeile
+    $ergebniS .= "     <a href=/$gname  \$Stil$gnameVar> $Farbe1 $gnameLang $Farbe2 </a></p> \$Ww$gnameVar\n";    // Dies ist die weitere Weiserzeile
     }
   //**/  Echonn("\n(bWfG) (3) \$ergebniS: .................................................\n" . $ergebniS  . "(/3) ................  /\$ergebniS  ..............\n\n";
 	return $ergebniS;  

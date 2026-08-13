@@ -47,8 +47,9 @@
     function aktVorschau(ta, pv) {
         clearTimeout(pvTimer);
         pvTimer = setTimeout(function () {
+            var typ = /\.dat$/i.test(window.DM_Pfad || '') ? 'dat' : '';
             ajax('POST', '/vorschau.php',
-                 'dmm=' + encodeURIComponent(ta.value),
+                 'dmm=' + encodeURIComponent(ta.value) + '&typ=' + typ,
                  function (st, txt) { if (st === 200) pv.innerHTML = txt; });
         }, 350);
     }
@@ -107,7 +108,7 @@
         ta.style.cssText =
             'flex:1;min-width:0;font-family:monospace;font-size:14px;' +
             'padding:8px;border:1px solid #aab;resize:none;' +
-            'background:#fff;box-sizing:border-box;line-height:1.5';
+            'background:#fff;box-sizing:border-box;line-height:1.2';
         ta.addEventListener('input', function () { aktVorschau(ta, pv); });
 
         // Rechte Seite: Live-Vorschau
