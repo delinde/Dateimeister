@@ -1,3 +1,4 @@
+
 ##<small>#############################################
 ##   neu.Gutes-Deutsch.de
 ##         Anleitung:  hier ganz unten.
@@ -9,18 +10,14 @@ Wegweiser
 - SachenA
 - - Sache1
 - - Sache2
-- - Sache3
-- - Sache4
 - - UntersachenA1
 - - - Sache1
 - - - Sache122
 - - - - Sache123
+- - - -Lalala
 - SachenB
 - - Sache1
 - - Sache2
-- - Sache3
-- - Sache4
-- quatsch
 
 ## - - - andereNetzseiten              andere Netzseiten
 ## - - - - Buecher                     Bücher
@@ -30,9 +27,10 @@ Wegweiser
 ## - - Mitmachen
 ## - - Ziel                              Ziel    ##  dieser Sammlung
 - Herausgeber
-## - - Bauhof
+ - - Bauhof
 - - - ueberDateimeister    Über den Dateimeister
-## - - - Wegweiserdaten 
+- - - Kurzanleitung
+- - - Wegweiserdaten.dat    Wegweiser
 - - - NichtGefunden         Nicht gefunden
 
  

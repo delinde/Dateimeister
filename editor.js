@@ -37,7 +37,7 @@
         x.open(methode, url, true);
         if (methode === 'POST')
             x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        x.onload  = function () { cb(x.status, x.responseText); };
+        x.onload  = function () { cb(x.status, x.responseText, x); };
         x.onerror = function () { cb(0, 'Netzwerkfehler'); };
         x.send(koerper || null);
     }
@@ -54,7 +54,8 @@
     }
 
     // ── Editor-UI aufbauen und in Inhaltsspalte einsetzen ────────────────────
-    function oeffneEditor(rohtext) {
+    function oeffneEditor(rohtext, schreibbar) {
+        if (schreibbar === undefined) schreibbar = true;
         // Inhaltsspalte finden: breitestes <td>
         var tds = document.querySelectorAll('td'), zielTd = null, maxB = 0;
         for (var i = 0; i < tds.length; i++) {
@@ -66,6 +67,15 @@
 
         // Äußerer Wrapper
         var aussen = mk('div', 'width:100%;box-sizing:border-box;padding:4px');
+
+        // Schreibschutz-Warnung
+        if (!schreibbar) {
+            var warn = mk('div',
+                'background:#fdd;border:1px solid #c66;border-radius:4px;' +
+                'padding:8px 12px;margin-bottom:8px;color:#900;font-weight:bold');
+            warn.textContent = 'Diese Datei ist schreibgeschützt – Änderungen können hier nicht gesichert werden.';
+            aussen.appendChild(warn);
+        }
 
         // Toolbar
         var tbar = mk('div',
@@ -111,11 +121,14 @@
         // Statuszeile
         var stat = mk('div', 'margin-top:8px;display:flex;align-items:center;gap:10px');
 
+        if (!schreibbar) { ta.readOnly = true; ta.style.background = '#f5f5f5'; }
+
         var btnS = mk('button');
         btnS.type = 'button'; btnS.textContent = '💾 Speichern';
         btnS.style.cssText =
             'padding:7px 22px;background:#446;color:#fff;' +
             'border:none;border-radius:4px;cursor:pointer;font-size:15px';
+        if (!schreibbar) { btnS.disabled = true; btnS.style.opacity = '0.4'; }
 
         var btnA = mk('button');
         btnA.type = 'button'; btnA.textContent = 'Abbrechen';
@@ -153,7 +166,11 @@
         aussen.appendChild(stat);
         zielTd.appendChild(aussen);
 
-        ta.focus();
+        requestAnimationFrame(function () {
+            ta.scrollTop = 0;
+            ta.selectionStart = ta.selectionEnd = 0;
+            ta.focus();
+        });
         aktVorschau(ta, pv);   // initiale Vorschau
     }
 
@@ -176,9 +193,10 @@
             ajax('GET',
                  '/holeDateiRoh.php?datei=' + encodeURIComponent(window.DM_Pfad),
                  null,
-                 function (st, txt) {
+                 function (st, txt, xhr) {
                      if (st === 200) {
-                         oeffneEditor(txt);
+                         var schreibbar = !xhr || xhr.getResponseHeader('X-DM-Schreibbar') !== '0';
+                         oeffneEditor(txt, schreibbar);
                      } else {
                          alert('Laden fehlgeschlagen:\n' + txt);
                          btn.textContent = '✎ Bearbeiten';

@@ -24,7 +24,7 @@ if (strpos($pfad, '..') !== false) { http_response_code(403); exit('Ungültiger 
 
 // Dieselbe Pfad-Auflösung wie holeDatei() / holeDateiRoh.php
 $endung     = '.htm';
-if (preg_match(',\.(php|htm)$,i', $pfad)) $endung = '';
+if (preg_match(',\.(php|htm|dat)$,i', $pfad)) $endung = '';
 $Dateipfad  = __DIR__ . '/Dateien/' . $pfad . $endung;
 
 if (!file_exists($Dateipfad) && preg_match(',^([a-z]+)/(.+)$,i', $pfad, $m)) {
@@ -63,8 +63,14 @@ if (!file_exists($sicherung)) {   // nicht zweimal pro Minute sichern
     @copy($pfadReal, $sicherung);
 }
 
+// Schreibbarkeit vorab prüfen (verhindert PHP-Warning → falsches HTTP-200)
+if (!is_writable($pfadReal)) {
+    http_response_code(403);
+    exit('Schreibgeschützt – Datei ist nicht beschreibbar.');
+}
+
 // Datei schreiben
-if (file_put_contents($pfadReal, $dmm) !== false) {
+if (@file_put_contents($pfadReal, $dmm) !== false) {
     echo 'OK';
 } else {
     http_response_code(500);

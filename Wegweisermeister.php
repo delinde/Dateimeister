@@ -193,8 +193,11 @@ function baueWegweiserFuerGeschwisterNr($forenkG) {
         $ergebniS .= "<p style=margin:4px;margin-left:" . $einrueckPt . "pt;>\n ";
 
         $hat_kinder = isset($Verweise[$gNr + 1]) && $Verweise[$gNr + 1]["Tiefe"] > $tiefe;
-        $_dateiDa   = file_exists("Dateien/de/$gname.htm")
+        $_dateiDa   = file_exists("Dateien/de/$gname")
+                   || file_exists("Dateien/de/$gname.htm")
+                   || file_exists("Dateien/de/$gname.dat")
                    || _sucheInUnterordnern("Dateien/de", "$gname.htm")
+                   || _sucheInUnterordnern("Dateien/de", "$gname.dat")
                    || $hat_kinder;
         $Farbe1 = $_dateiDa ? "" : "<span style=color:#999>";
         $Farbe2 = $_dateiDa ? "" : "</span>";
@@ -260,8 +263,11 @@ function baueWegweiserFuerGeschwister($name)  {       ///    liefert eine Geschw
 		$_gNr = $VerweiseNummern[$gname] ?? -1;
 		$_hatKinder = $_gNr >= 0 && isset($Verweise[$_gNr+1])
 		           && $Verweise[$_gNr+1]["Tiefe"] > $Verweise[$_gNr]["Tiefe"];
-		$_dateiDa = file_exists("Dateien/de/$gname.htm")
+		$_dateiDa = file_exists("Dateien/de/$gname")
+		         || file_exists("Dateien/de/$gname.htm")
+		         || file_exists("Dateien/de/$gname.dat")
 		         || _sucheInUnterordnern("Dateien/de", "$gname.htm")
+		         || _sucheInUnterordnern("Dateien/de", "$gname.dat")
 		         || $_hatKinder;
 		$Farbe1 = $_dateiDa ?  "" : "<span style=color:#999>";
 		$Farbe2 = $_dateiDa ?  "" : "</span>";

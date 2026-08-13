@@ -19,7 +19,7 @@ if (strpos($datei, '..') !== false) { http_response_code(403); exit('Ungültiger
 
 // Pfad-Auflösung: identisch mit holeDatei()
 $endung      = '.htm';
-if (preg_match(',\.(php|htm)$,i', $datei)) $endung = '';
+if (preg_match(',\.(php|htm|dat)$,i', $datei)) $endung = '';
 $Dateipfad   = 'Dateien/' . $datei . $endung;
 
 // Unterordner-Suche (case-insensitiv) – wie in holeDatei()
@@ -51,4 +51,5 @@ if (!is_file($pfadReal)) {
     exit('Datei nicht gefunden.');
 }
 
+header('X-DM-Schreibbar: ' . (is_writable($pfadReal) ? '1' : '0'));
 readfile($pfadReal);

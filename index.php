@@ -209,7 +209,7 @@ list($was_Land, $was_DName) = explode("/", $was);      // Land, Dateiname
 
 //////  .................................................   php ... Josephspfennig ....
 // //    $wasStil   = "Stil".$was_DName;           
-$wasStil   = "Stil" . preg_replace(",\.php,", "", $was_DName);  
+$wasStil   = "Stil" . preg_replace(",\.[a-zA-Z0-9]+$,", "", $was_DName);
 $$wasStil  = " class='jetztDick'";    //  z.B. StilBilderrahmen
        Echon(6.1, "was");
        Echonn ("(8)    \$wasStil: <b> $wasStil </b>    >>>         \$\$wasStil: <b>" . $$wasStil . "</b>" );
@@ -252,7 +252,7 @@ if ($was_holDatei
     ## Keine doppelten Anführungszeichen im JS nötig → kein Escaping für eval
     $pfadJS = str_replace("'", "\\'", $was_holDatei);
     $DM_EditorScript = "<script>var DM_Pfad='$pfadJS';</script>"
-                     . "<script src='/editor.js'></script>";
+                     . "<script src='/editor.js?v=" . filemtime(__DIR__ . '/editor.js') . "'></script>";
 }
 
 $wasTitel  = $was_DName;

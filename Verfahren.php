@@ -139,7 +139,7 @@ function holeDatei($dateiname,$endung=".htm")  {
 	global $Masse_der_Erde_in_kg, $Goldpreis_2010_in_Euro_je_Unze, $Gramm_je_Unze, $DM_je_Euro, $diesJahr, $Zinssatz, $wastun; 
 	global $Ausgabeyy, $Sendgroeszen; # geht nicht:, $_GET, $_REQUEST;
 	$Dateienordner = "Dateien/";        
-	if (preg_match(",(\.php)|(\.htm),", $dateiname))
+	if (preg_match(",(\.php)|(\.htm)|(\.dat),", $dateiname))
 	  $endung = "";   //   also: kein  .htm  nach  .php
   $Dateipfad = $Dateienordner.$dateiname.$endung;
 # /**/   echo "Dateipfad: <b>" . $Dateipfad. "</b><br>";
@@ -162,6 +162,11 @@ function holeDatei($dateiname,$endung=".htm")  {
       }
       if ($gefunden)
           $Dateipfad = $gefunden;
+  }
+  // Fallback: .dat versuchen, wenn .htm nicht gefunden (z.B. Wegweiserdaten)
+  if (!file_exists($Dateipfad) && $endung === '.htm') {
+      $datPfad = $Dateienordner . $dateiname . '.dat';
+      if (file_exists($datPfad)) $Dateipfad = $datPfad;
   }
   if (file_exists($Dateipfad))  {
 #      echo "\$dateiname: $dateiname";
@@ -201,6 +206,3 @@ function holeDatei_vorher($template,$endung="htm")  {
 	  if(!$templatefolder) $templatefolder = "templates";
 			$templatecache[$template] = implode("",file($templatefolder."/".$template.".".$endung)); }
   	return str_replace("\"","\\\"", ruesteAus($templatecache[$template]));   }
-
-?>
-
