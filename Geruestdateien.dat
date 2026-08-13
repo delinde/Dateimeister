@@ -1,0 +1,26 @@
+## Geruestdateien.dat
+## ─────────────────────────────────────────────────────────────────────────────
+## Dateien in  Dateien/de/  die bei neuesProjekt.sh NICHT nach LoeschMich/
+## verschoben werden – also das Gerüst, das bei jedem neuen Projekt bleibt.
+##
+## Format: ein Dateiname je Zeile (mit Endung).
+##         Kommentarzeilen beginnen mit ##.
+## ─────────────────────────────────────────────────────────────────────────────
+
+## Layout-Gerüst
+dieSeite.htm
+
+## Pflichtseiten
+Willkommen.htm
+NichtGefunden.htm
+Herausgeber.htm
+ueberDateimeister.htm
+
+## Navigationsdaten
+Wegweiserdaten.dat
+
+## Navigations-Knoten ohne eigene .htm-Datei (immer in Wegweiserdaten.dat behalten)
+Wegweiser
+
+## Stildateien
+di.css

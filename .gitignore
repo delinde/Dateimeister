@@ -1,0 +1,28 @@
+# Dateimeister – .gitignore
+
+# Automatische Sicherungskopien des Browsers-Editors
+**/.versionen/
+
+# Zu löschende Altdateien
+Dateien/de/LoeschMich/
+
+# Inhalte anderer Projekte (nicht Teil des Dateimeister-Beispiels)
+Dateien/GrimmsMaerchen/
+
+# Betriebssystem-Dateien
+.DS_Store
+**/.DS_Store
+
+# Editor-Hilfsdateien
+*.swp
+*.bak
+
+# Wegweiser-Sicherungen von neuesProjekt.sh
+Dateien/de/Wegweiserdaten.dat_0
+
+# Saug-Skripte (projektspezifisch, kein Dateimeister-Bestandteil)
+Dateien/de/saug/
+
+# Temporäre Arbeitsdateien
+**/wd
+Dateien/de/__NeuGutesDeutsch/asdfs.html

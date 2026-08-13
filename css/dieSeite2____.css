@@ -1,0 +1,30 @@
+/*###############################################################*\
+##
+##     dieSeite.css
+##
+\*###############################################################*/
+
+
+body            {  font-family:serif; background:#ffcc44; font-size:14px;  }
+table           {  font-size:12pt; color:#225; border:solid 0px; border-color:#f80;   } 
+p               {  margin:0px; margin-top:4pt;        }
+td              {  color:#fc2; vertical-align:top; margin:0px; padding:0px; }
+
+
+a               {  margin:0px; padding:0px; font-size:18px }
+a:link          {  color:#347; text-decoration:none }
+a:visited       {  color:#457; text-decoration:none }
+a:hover         {  color:#469; font-weight:bold;text-decoration:none }
+a:active        {  color:#f00; text-decoration:underline }
+
+a.jetztDick     {  color:#f00; font-weight:bold  }
+a.nochNicht     {  color:#99a  }
+
+.Nws2           {  font-size:24pt }
+.Nws22          {  font-size:17pt }
+
+/*************************************************************************************\
+**
+**    E N D E    dieSeite.css
+**
+\*************************************************************************************/

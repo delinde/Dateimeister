@@ -1,0 +1,76 @@
+/*###############################################################*\
+##
+##     dieSeite.css
+##
+\*###############################################################*/
+
+
+body            {  font-family:serif; background:#E0F3ff; font-size:14px;  }
+tablyyyy        {  font-size:12pt; color:#225; border:solid 0px; border-color:#f80;   } 
+p               {  margin:0px; margin-top:4pt;        }
+p.Absatz        {  margin:0px; margin-top:10pt;        }
+td              {  Kolor:#225; vertical-align:top; margin:0px; padding:0px; }
+
+
+.Verzeichnisverweis  {  margin-top:4pt; margin-bottom:0pt; font-size:14pt; }
+.Kopfteil       {  white-space:nowrap; min-width:680px } 
+.linkeSpalte    {  width:153px;  min-width:153px;  max-width:153px;  }
+.dieMitte       {  width:600px;  min-width:500px;  max-width:700px;  }
+.rechteSpalte   {  width:160px;  min-width:160px;  max-width:180px;  }
+.dieSeite       {  width:1000px; min-width:1000px; max-width:1000px; }
+.Absatz4        {  text-indent:1.2em; margin-top:2pt;  margin-bottom:2pt;} 
+.Absatz6        {  text-indent:1.2em; margin-top:4pt;  margin-bottom:2pt;} 
+.Absatz8        {  text-indent:1.2em; margin-top:6pt;  margin-bottom:2pt;} 
+.Absatz10       {  margin-top:10pt; margin-bottom:2pt;} 
+.FuSzteil       {  font-family:verdana,sansserif; font-size:10px; color:#888899; text-decoration:none; }
+
+.Kopf1          {  font-size:24pt; color:#449; }
+.Kopf2          {  font-size:24pt; color:#225; margin-top:10pt;  line-height:25pt }
+
+.Ueberschrift0  {  font-size:18pt; color:#448; margin-top:10pt; margin-bottom:9pt; font-weight:bold}
+.Ueberschrift   {  font-size:18pt; color:#448; margin-top:124pt; margin-bottom:9pt; font-weight:bold}
+.Wortlaut       {  font-size:12pt; color:#0f0; }        // dringt nicht durch
+
+a               {  margin:0px; padding:0px; font-size:18px }
+a:link          {  color:#347; text-decoration:none }
+a:visited       {  color:#457; text-decoration:none }
+a:hover         {  color:#469; font-weight:bold;text-decoration:none }
+a:active        {  color:#f00; text-decoration:underline }
+
+a.jetztDick     {  color:#337; font-weight:bold  }
+a.nochNicht     {  color:#99a  }
+
+.Nws2           {  font-size:24pt }
+.Nws22          {  font-size:17pt }
+
+.rot            {  color:#b00  }
+.gruen          {  color:#040  }
+
+.haengspan      {  font-size:2.5em;   margin-right:4px;  
+                   line-height:0.8em;   float:left; d_isplay:block; 
+                   padding: 0em -0.1em;
+								   margin: 0.1em 0.05em 0 -0.1em;     }
+//									gefunden bei: Vanityfair.com 
+
+p.haeng__yy::first-letter 
+                {  color: #66c;
+		               background-color: #ffe;
+                   font-size: 290%;
+                   font-weight: yybold;
+                   padding: 0em -0.1em;
+                   margin: 0.1em 0.05em 0 -0.1em;
+                   float: left;
+                   yyline-height: 2.4em;
+								}
+
+.haeng::first-letter {
+	font-size: 243%;
+	padding: 0em -0.1em;
+	margin: 0.1em 0.05em 0 -0.1em;
+	float: left;
+} 
+
+
+/*************************************************************************************\
+**    E N D E    dieSeite.css
+\*************************************************************************************/

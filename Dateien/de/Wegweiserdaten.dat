@@ -1,0 +1,69 @@
+##<small>#############################################
+##   neu.Gutes-Deutsch.de
+##         Anleitung:  hier ganz unten.
+###############################################
+
+
+Wegweiser
+- Willkommen   
+- SachenA
+- - Sache1
+- - Sache2
+- - Sache3
+- - Sache4
+- - UntersachenA1
+- - - Sache1
+- - - Sache122
+- - - - Sache123
+- SachenB
+- - Sache1
+- - Sache2
+- - Sache3
+- - Sache4
+- quatsch
+
+## - - - andereNetzseiten              andere Netzseiten
+## - - - - Buecher                     Bücher
+## - - - - - BuecherUeberMaerchen      Bücher über Märchen
+## - - - - - Woerterbuecher            Wörterbücher
+## - - - - - andereBuecher             andere Bücher
+## - - Mitmachen
+## - - Ziel                              Ziel    ##  dieser Sammlung
+- Herausgeber
+## - - Bauhof
+- - - ueberDateimeister    Über den Dateimeister
+## - - - Wegweiserdaten 
+- - - NichtGefunden         Nicht gefunden
+
+ 
+ 
+##  ==========================
+##  Zubringer-Anschriften:
+##  --------------------------
+##  wiki.gutes-deutsch.de          (k80)
+##     kommasetzung.de            (k80)      ==>
+##     rat-fuer-deutsche-rechtschreibung.de  (k174)    ==>
+##     sprachakademie.de          (k174)     ==>
+##     deutsche-sprachakademie.de (k174)     ==>       
+##     sprachverein.de            (k174)     ==>
+##     deutscher-sprachverein.de  (k174)     ==>
+##     sprachpflege.de            (k174)     ==>
+
+##   auch:
+## Satzanweisung.de       ==>    eigenes Wiki
+##     Wortbildung.de    ==>    http://wiki.gutes-deutsch.de/index.php/Wortbildung
+ 
+ 
+###########################################################################
+##   Anleitung  -  Dies ist die Datei  Wegweisermeister.dat   für  neu.gutes-deutsch.de
+###########################################################################
+##  Kommentare haben zwei Rauten davor.
+##  Einrückung = Unterordnung durch "- ", also Bindestrich und Leerzeichen.
+##  Das dann folgende Wort z.B. 
+##     Lalala  
+##  darf die Zeichen -_a-zA-Z0-9 enthalten. Es ist der Bezeichner für die dazugehörige Datei 
+##     /home/www/neu.gutes-deutsch.de/html/Dateien/de/Lalala.htm
+##  Nicht erlaubt sind z.B. Umlaute und Leerzeichen.
+##  Getrennt durch mindestens zwei Leerzeichen kann dann ein menschensprachlicher Ausdruck kommen, 
+##  der im Wegweiser sichtbar dargestellt wird.
+###########################################################################</small>

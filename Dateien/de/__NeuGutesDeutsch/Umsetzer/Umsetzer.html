@@ -1,0 +1,266 @@
+<html>
+<head>
+<title>Rechtschreib-Umsetzer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type=text/javascript>
+
+function sz(was) { return was.replace(/ss/g, "ß"); } 
+function uc(was) { return was.toUpperCase(); }  
+function lc(was) { return was.toLowerCase(); }  
+
+function filtereRechtschreibung(was)  {
+  was = was.replace(/\bAss\b/g, "As");
+  was = was.replace(/\bAlbtraum\b/g, "Alptraum");
+  was = was.replace(/sodass\b/g, "so dass");
+  was = was.replace(/(S|s)tattdessen/g, "$1tatt dessen");
+  was = was.replace(/(A|a)ufw.ndig/g, "$1ufwendig");
+  was = was.replace(/elbstständig/g, "elbständig");
+  was = was.replace(/([Nn])ummerier/g, "$1umerier");
+  was = was.replace(/([Pp])latzier/g, "$1lazier");
+  was = was.replace(/([Pp])otenziell/g, "$1otentiell");
+  was = was.replace(/([Pp])otenzial/g, "$1otential");
+  was = was.replace(/(E|e)in jedes Mal/g, "$1in jedes# Mal");   //  schützen
+  was = was.replace(/(B|b)isschen/g, "$1ißchen");
+  was = was.replace(/(J|j)edes Mal/g, "$1edesmal");
+  was = was.replace(/(V|v)oran treiben/g, "$1orantreiben");     
+  was = was.replace(/ssch/g, "s#sch");                 //  Seltenes schützen
+  was = was.replace(/Ausstieg/g, "Aus#stieg");         //  Seltenes schützen
+  was = was.replace(/Bussteig/g, "Bus#steig");         //  Seltenes schützen
+  was = was.replace(/undesstaat/g, "undes#staat");     //  Seltenes schützen
+  was = was.replace(/(au)ss([aeä])/gi, "$1s#s$2");     //  Seltenes schützen
+  was = was.replace(/sszene/gi, "s#szene");            //  Seltenes schützen
+  was = was.replace(/sstunde/gi, "s#stunde");          //  Seltenes schützen
+  was = was.replace(/(s|S)trasse/g, "$1traße");
+  was = was.replace(/(h|H)asserf/g, "$1aßerf");
+  nix = was.replace(/(Fassentnahme)/gm,   sz(RegExp.$1));
+  was = was.replace(/(Fassentnahme)/gm,   sz(RegExp.$1));
+  NIX = was.replace(/(Messergebnis)/gm,   sz(RegExp.$1));
+  was = was.replace(/(Messergebnis)/gm,   sz(RegExp.$1));
+  NIX = was.replace(/(Passersatz)/gm,     sz(RegExp.$1));
+  was = was.replace(/(Passersatz)/gm,     sz(RegExp.$1));
+  NIX = was.replace(/(schlussendlich)/gm, sz(RegExp.$1));
+  was = was.replace(/(schlussendlich)/gm, sz(RegExp.$1));
+  was = was.replace(/reformierter/g, "herkömmlicher = moderner");   //  Diese Zeile nur für diese Zeige-Fassung!
+  was = was.replace(/ss\b/g, "ß");                      //  ss am Wortende  ->  ß
+  was = was.replace(/sss/g, "ßs");                      //  sss -> ßs
+  was = was.replace(/ussa/ig, "ußa");                    //  essta  -> eßta
+  was = was.replace(/([mM])issacht/g, "$1ißacht");                      //  ss am Wortende  ->  ß
+  NIX = was.replace(/((?:[^GB]|\A)[bcdfghjklmnpqrstvwxyz][aeiouäöü])ss([bcdfghjklmnpqrstvwxyz])/ig, "$1ß$2");  // ss >  ß ;  Glasstück, Grasstück
+  was = was.replace(/((?:[^GB]|\A)[bcdfghjklmnpqrstvwxyz][aeiouäöü])ss([bcdfghjklmnpqrstvwxyz])/ig, "$1ß$2");  // ss >  ß ;  Glasstück, Grasstück
+  NIX = was.replace(/([eio])\1\1/g, "$1$1-" + uc(RegExp.$1));            //  Teeei ->Tee-Ei
+  was = was.replace(/([eio])\1\1/g, "$1$1-" + uc(RegExp.$1));            //  Teeei ->Tee-Ei
+  was = was.replace(/(.)\1\1([aeiouyäöü])/g, "$1$1$2"); //  mmme -> mme
+  NIX = was.replace(/(\d+)-(jähr|mal|fach|er)/g, lc(RegExp.$1+RegExp.$2));
+  was = was.replace(/(\d+)-(jähr|mal|fach|er)/g, lc(RegExp.$1+RegExp.$2));
+  was = was.replace(/so genannt/g, "sogenannt")
+  was = was.replace(/(S|s)elbstständig/, "$1elbständig");
+  was = was.replace(/rgendetwas/g, "rgend etwas");
+  was = was.replace(/rgendeiner/g, "rgend einer");
+  was = was.replace(/(z)urzeit/g, "$1ur Zeit");  //zurzeit, Zurzeit
+  was = was.replace(/(G|g)räulich/g, "$1reulich");
+  was = was.replace(/Tipp\b/g, "Tip");
+  NIX = was.replace(/(lles beim Alten)/g,            lc(RegExp.$1));
+  was = was.replace(/(lles beim Alten)/g,            lc(RegExp.$1));
+  NIX = was.replace(/([Ii])(m Allgemeinen)/g,  "$1" +lc(RegExp.$2));
+  was = was.replace(/([Ii])(m Allgemeinen)/g,  "$1" +lc(RegExp.$2));
+  NIX = was.replace(/([Ii])(m Wesentlichen)/g, "$1" +lc(RegExp.$2));
+  was = was.replace(/([Ii])(m Wesentlichen)/g, "$1" +lc(RegExp.$2));
+  was = was.replace(/#/g, "");    //  # ist zeitweiliger ss-Schützer
+  return (was);
+  }
+
+function erneuereRechtschreibung()  {
+  nix = filtereRechtschreibung(document.getElementById("Reformschrieb").value);  //    zum Aufwärmen, damit RegExp sich selbst kennt, seufz ....
+  document.getElementById("Rechtschrieb").value = filtereRechtschreibung(document.getElementById("Reformschrieb").value);
+  }
+
+</script>
+
+
+
+
+
+
+
+
+</head>
+
+<body bgcolor="#FFFFCC" text="#000066">
+
+  <div align="center"></div>
+  <table width="80%">
+    <tr> 
+      <td align="center" valign="top" colspan="3"> 
+        <p><font size="6"><b>&nbsp;&nbsp;U m s e t z e r :</b></font></p>
+        </td>
+    </tr>
+  </table>
+  <table width="80%">
+    <tr> 
+      <td colspan="2"> 
+        <div align="center">
+          <table width="85%" border="0">
+            <tr> 
+              <td>
+                <div align="center"><font size="6">&#132;reformierte&#147;<br>
+                  Schreibweise</font></div>
+              </td>
+              <td> 
+                <div align="center"><font size="6" onClick=javascript:erneuereRechtschreibung();> <img src="http://gutes-deutsch.de/Umsetzer/Pfeilnachrechts.gif" align="absmiddle" border="0" width="76" height="19"> 
+                  <br>
+                  </font></div>
+              </td>
+              <td> 
+                <div align="center"><font size="6"> normale<br>
+                  Schreibweise</font></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        </td>
+    </tr>
+    <tr> 
+      <td align="center" valign="top"> 
+        <textarea id="Reformschrieb" name="Reformschrieb" cols="36" rows="28" wrap="VIRTUAL">Hier bitte Reformschrieb eintragen oder &uuml;ber die Zwischenablage einf&uuml;llen.
+- - - - - 
+Ein Wortlaut zum Versuchen:
+
+Dass das
+Fass
+nass ist,
+passt im Allgemeinen.
+- - - - - - -
+Gr&auml;ulicher Essstil im Esssaal
+potenziell
+Mit dem Nummerierstempel irgendetwas selbstständig nummerieren
+ein Ass platzieren
+Platzregen
+Bundesstaat, bundesstaatlich; aussah, aussähe
+Assmus (seltener Eigenname)
+aufw&auml;ndige Fassentnahme
+Messergebnis
+stattdessen Passersatz
+Schlossstra&szlig;e
+Passstrasse (Schweizer und auch Deppen-Deutsch)
+Aussage, aussagen 
+Liebesszene als Schlussszene in der Tennisstunde
+Passau
+Albtraum
+Stuss
+Schluss.
+</textarea>
+      </td>
+      <td align="center" valign="top"> 
+        <p> 
+          <textarea name="Rechtschrieb" id="Rechtschrieb" cols="36" rows="28" wrap="VIRTUAL">Hierher kommt dann das Ergebnis.</textarea>
+        </p>
+      </td>
+    </tr>
+    <tr> 
+      <td align="center" valign="top" colspan="2"> 
+        <p>&nbsp;</p>
+        <p><font size="5">Und hier ist der Wortlaut des Umsetzungs-Schriwwels 
+          (Sprache: Perl):</font><br>
+          (Wer kann Verzeichnisse &uuml;ber h&auml;ufige &#132;reformierte&#147; 
+          W&ouml;rter liefern?)</p>
+      </td>
+    </tr>
+    <tr> 
+      <td align="center" valign="top" colspan="2"> 
+        <table width="91%" border="0" height="203">
+          <tr> 
+            <td width="13%">&nbsp;</td>
+            <td width="74%" bgcolor="#FFFFCC"> 
+              <p><font color="#660033">sub sz { $Kt = shift; $Kt =~ s/ss/ß/; $Kt 
+                } // Verfahren: Seltenes umsetzen <br>
+
+<br>
+s,\bAss\b,As,g;<br>
+s,\bAlbtraum\b,Alptraum,g;<br>
+s,sodass\b,so dass,g;<br>
+s,(S|s)tattdessen,$1tatt dessen,g;<br>
+s,(A|a)ufw.ndig,$1ufwendig,g;<br>
+s,([Nn])ummerier,$1umerier,g;<br>
+s,([Pp])latzier,$1lazier,g;<br>
+s,([Pp])otenziell,$1otentiell,g;<br>
+s,([Pp])otenzial,$1otential,g;<br>
+s((E|e)in jedes Mal)($1in jedes# Mal)g;   //  schützen<br>
+s((B|b)isschen)($1ißchen)g;<br>
+s((J|j)edes Mal)($1edesmal)g;<br>
+s((V|v)oran treiben)($1orantreiben)g;<br>
+s(ssch)(s#sch)g;                 //  Seltenes schützen<br>
+s(Ausstieg)(Aus#stieg)g;         //  Seltenes schützen<br>
+s(Bussteig)(Bus#steig)g;         //  Seltenes schützen<br>
+s(undesstaat)(undes#staat)gi;  //  Seltenes schützen<br>
+s((s|S)trasse)($1traße)g;<br>
+s((h|H)asserf)($1aßerf)g;<br>
+s,(Fassentnahme|Messergebnis|Passersatz|schlussendlich),sz($1),ge;    // Seltenes umsetzen<br>
+s/reformierter/herkömmlicher = moderner/;   //  Diese Zeile nur für diese Zeige-Fassung!<br>
+s/sss/ßs/g;                      //  sss -> ßs<br>
+s/auss(a|ä|e)h/aus#s$1h/g;<br>
+s/ussa/ußa/g;                    //  essta  -> eßta<br>
+s/ss\b/ß/g;                      //  ss am Wortende  ->  ß<br>
+<br>
+s/([mM])issacht/$1ißacht/g;                      //  ss am Wortende  ->  ß<br>
+s/((?:[^GB]|\A)[bcdfghjklmnpqrstvwxyz][aeiouäöü])ss([bcdfghjklmnpqrstvwxyz])/$1ß$2/gi;  //  Glasstück, Grasstück<br>
+s,([eio])\1\1,"$1$1-".uc($1),ge;            //  Teeei ->Tee-Ei<br>
+s/(.)\1\1([aeiouyäöü])/$1$1$2/g; //  mmme -> mme<br>
+s/(\d+)-(jähr|mal|fach|er)/lc("$1$2")/gei;<br>
+s/so genannt/sogenannt/g;<br>
+s,(S|s)elbstständig,$1elbständig,g;<br>
+s,rgendetwas,rgend etwas,g;<br>
+s,rgendeiner,rgend einer,g;<br>
+s/zurzeit/zur Zeit/g;<br>
+s/(G|g)räulich/$1reulich/g;<br>
+s,Tipp\b,Tip,g;<br>
+s/(lles beim Alten)/lc($1)/ge;<br>
+s/([Ii])(m Allgemeinen)/$1.lc($2)/ge;<br>
+s/([Ii])(m Wesentlichen)/$1.lc($2)/ge;<br>
+s/#//g;<br>
+
+
+               </font> </p>
+              </td>
+            <td width="10%"> 
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+            </td>
+            <td width="3%">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr> 
+      <td align="center" valign="top" colspan="2"> 
+        <p>Bitte schreiben Sie mir, wenn Sie noch Verbesserungsvorschl&auml;ge 
+          haben: <a href="mailto:Detlef@Lindenthal.com">Detlef@Lindenthal.com<br>
+          </a><br>Dank an Ralph Brucker f&uuml;r das Tee-Ei und die Ballett&auml;nzerin,<br>
+          Dank an Michael Senn f&uuml;r das As und f&uuml;rs Plazieren.<br>
+          Dank an Herrn H.-J. Martin f&uuml;r <i>Tip</i> und <i>so da&szlig;</i> ­ 
+          doch warum so skeptisch?<br>
+          Herrn E. Schaefer folgend, berücksichtigen wir auch: <i>Potential</i> 
+          und <i>Damoklesschwert</i>.<br>
+	  Dank an Frau ... f&uuml;r &#132;aufw&auml;ndig&#147;.<br>
+	Dank an Herrn Ren&eacute; Kriest f&uuml;r <i>selbständig</i> und <i>irgend etwas</i>.<br>         
+		Dank an Herrn Heinz Erich Stiene f&uuml;r die <i>Stra&szlig;e</i> (deren Schreibung mit <i>ss</i> ein &#132;Reform&#147;-Kollateralschaden ist) <br>
+	und das h&auml;&szlig;liche <i>ha&szlig;erf&uuml;llt.</i>
+<br>Dank an S.S. (den feinsinnigen K&auml;mpfer gegen die ss-Diktatur) <br>
+f&uuml;r sein Eintreten gegen den <i>gr&auml;ulichen Essstil im Esssaal</i>. <br>
+Nun wird dort wieder auf Tischsitten geachtet :-).
+<br>Dank an Matthias Baltrusch für <i>aussah, aussähe</i> und <i>bundesstaatlich</i>.
+ <br>
+ <br> Jeder Fall, der in eine Regel paßt, kann verarztet werden.</p>
+
+<br><br>Andererseits: <a href=http://normalfilter.de>Normalfilter.de</a> hat inzwischen die besseren Filter.        </td>
+    </tr>
+  </table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>
+
