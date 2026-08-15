@@ -71,6 +71,26 @@ function ruesteAus($dingen)  {
   return $dingen;  }
 
 
+// Wie ruesteAus(), aber Kommentarzeilen (beginnen mit #) taubenblau.
+// Nicht-Kommentar-Blöcke werden gebündelt durch ruesteAus() geschickt,
+// damit \n-basierte DmM-Regeln (Absatz, <br> usw.) korrekt greifen.
+function ruesteAusDat($text) {
+    $zeilen = explode("\n", $text);
+    $out    = '';
+    $puffer = [];
+    foreach ($zeilen as $z) {
+        if (ltrim($z) !== '' && ltrim($z)[0] === '#') {
+            if ($puffer) { $out .= ruesteAus(implode("\n", $puffer)); $puffer = []; }
+            $out .= '<p style=\'color:#6c7c98;margin:0;line-height:1.2;font-size:0.9em\'>'
+                  . htmlspecialchars($z) . '</p>';
+        } else {
+            $puffer[] = $z;
+        }
+    }
+    if ($puffer) $out .= ruesteAus(implode("\n", $puffer));
+    return $out;
+}
+
 
   function replaceInternalLinks2( &$s ) {
     wfProfileIn( __METHOD__ );
@@ -169,21 +189,16 @@ function holeDatei($dateiname,$endung=".htm")  {
       if (file_exists($datPfad)) $Dateipfad = $datPfad;
   }
   if (file_exists($Dateipfad))  {
-#      echo "\$dateiname: $dateiname";
     if (preg_match(",\.php$,", $dateiname)) {
-#			echo "<br>(1) YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY";
-#			echo "<br>(2) YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY";
 		  ob_start();   //  Ausgabe in den Ausgabepuffer;
-      //   phpinfo();
       include($Dateipfad);   
-#     echo "(111) in holeDatei; Ausgabe: $Ausgabe<br>\n";
-#			echo "<br>(3) YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY";
-#			echo  ob_get_contents();
 			return ob_get_clean();      // gibt den Ausgabepuffer zurück und leert ihn
 		  }
 	  $Ausgabedatei = implode("",file($Dateipfad));
-	  if (!preg_match(",(Umsetzer),", $dateiname))      //   z.B. Umsetzer.htm, .js  nicht
-		  $Ausgabedatei = str_replace("\"","\\\"", ruesteAus($Ausgabedatei)); 
+	  if (!preg_match(",(Umsetzer),", $dateiname)) {     //   z.B. Umsetzer.htm, .js  nicht
+        $fn = preg_match(',\.dat$,', $Dateipfad) ? 'ruesteAusDat' : 'ruesteAus';
+		    $Ausgabedatei = str_replace("\"", "\\\"", $fn($Ausgabedatei));
+      }
     return $Ausgabedatei;   }
   else
     if (!strstr($Dateipfad, "Ww"))           //     bei WwGippppsNich.htm   gibt es keine Fehlermeldung
