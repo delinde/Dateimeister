@@ -61,10 +61,8 @@ function ruesteAus($dingen)  {
 ##? ingen = preg_replace(",NeUeZeIlE,", "\n<p>", $dingen);
   $dingen = preg_replace(",</tr>,", "</tr>\n", $dingen);
 
-  $dingen = preg_replace(",\[\[(w*)\|?(w*)?\]\],", "<a href=$1>$2$1", $dingen);
-//  $dingen = preg_replace(",\[\[(.*)\]\],", "<a href=$1>$1</a>", $dingen);
-
-  $dingen = preg_replace(",\[\[(.*)\|(.*)\]\],", "<a href=$1>$2</a>", $dingen);
+  $dingen = preg_replace(",\[\[([^|\]]+)\|([^\]]+)\]\],", "<a href=/$1>$2</a>", $dingen);  // [[link|Text]]
+  $dingen = preg_replace(",\[\[([^|\]]+)\]\],",           "<a href=/$1>$1</a>", $dingen);  // [[link]]
 
 
 
