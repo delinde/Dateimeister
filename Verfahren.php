@@ -81,7 +81,7 @@ function ruesteAusDat($text) {
     foreach ($zeilen as $z) {
         if (ltrim($z) !== '' && ltrim($z)[0] === '#') {
             if ($puffer) { $out .= ruesteAus(implode("\n", $puffer)); $puffer = []; }
-            $out .= '<p style=\'color:#6c7c98;margin:0;line-height:1.2;font-size:0.9em\'>'
+            $out .= '<p style=\'color:#76d;margin:0;line-height:1.2;font-size:0.9em\'>'
                   . htmlspecialchars($z) . '</p>';
         } else {
             $puffer[] = $z;
@@ -201,8 +201,18 @@ function holeDatei($dateiname,$endung=".htm")  {
       }
     return $Ausgabedatei;   }
   else
-    if (!strstr($Dateipfad, "Ww"))           //     bei WwGippppsNich.htm   gibt es keine Fehlermeldung
-	  return "Datei nicht gefunden: <b>$Dateipfad</b>";     
+    if (!strstr($Dateipfad, "Ww")) {         //     bei WwGippppsNich.htm   gibt es keine Fehlermeldung
+        $pfadAnz   = htmlspecialchars($Dateipfad);
+        $pfadAttr  = htmlspecialchars($Dateipfad, ENT_QUOTES);
+        $rueckAttr = htmlspecialchars($_SERVER['REQUEST_URI'] ?? '/', ENT_QUOTES);
+        return "Datei nicht gefunden: <b>$pfadAnz</b>"
+             . "<br><form method='post' action='/erstelleDatei.php' style='margin-top:8px'>"
+             . "<input type='hidden' name='pfad' value='$pfadAttr'>"
+             . "<input type='hidden' name='redirect' value='$rueckAttr'>"
+             . "<button type='submit' style='padding:6px 18px;background:#446;color:#fff;"
+             . "border:none;border-radius:4px;cursor:pointer;font-size:14px'>"
+             . "Diese Datei erstellen</button></form>";
+    }
   }
 
 function gibAus($template) {
