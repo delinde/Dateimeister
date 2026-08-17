@@ -1,0 +1,41 @@
+<!-- Anleitung.htm  –  neu angelegt 2026-08-17 -->
+<ue>Anleitung Dateimeister</ue>
+<hr color=#ddb>
+
+<ue0>Datei-Rechte (Linux)</ue0>
+
+Alle Inhalts-Dateien unter  Dateien/de/  haben Gruppe  oppe  und Rechte  664  (rw-rw-r--).
+Verzeichnisse haben  775  mit Setgid-Bit (2775),  damit neu angelegte Dateien
+die Gruppe  oppe  automatisch erben -- unabhängig davon, ob sie vom Browser
+(www-data) oder direkt (oppe) angelegt werden.
+
+Einrichtung (einmalig, August 2026):
+-- www-data zur Unix-Gruppe oppe hinzugefügt  (usermod -a -G oppe www-data)
+-- Setgid-Bit auf alle Verzeichnisse unter Dateien/de/  (chmod 2775)
+-- Gruppe aller Dateien auf oppe gesetzt  (chgrp -R oppe Dateien/de/)
+-- Dateirechte auf 664 gesetzt  (chmod 664)
+-- php-fpm neu gestartet (damit www-data die neue Gruppe sieht)
+
+Ergebnis: Im Browser angelegte Dateien (erstelleDatei.php) sind danach
+ohne chown-Umweg direkt fuer git und vim schreibbar.
+
+
+<ue0>Wegweiser-Datei</ue0>
+
+Die Datei  [[Wegweiserdaten.dat]]  steuert den Wegweiser (linke Spalte).
+Aufbau einer Zeile:
+
+  Dateiname    Angezeigter Name
+
+Trennzeichen: mindestens 2 Leerzeichen oder Tabs.
+Einrueckung: je  -   (Bindestrich + Leerzeichen) eine Ebene tiefer.
+
+Beispiel:
+  Willkommen    Willkommen
+  - SachenA
+  - - Sache1    Sache 1
+
+
+<ue0>Verweise im Text</ue0>
+
+Siehe [[Kurzanleitung]].
