@@ -53,6 +53,7 @@ if (!file_exists($pfadReal)) {
     if (@file_put_contents($pfadReal, $inhalt) === false) {
         http_response_code(500); exit('Datei konnte nicht geschrieben werden.');
     }
+    @chmod($pfadReal, 0664);
 }
 
 // Zurück zur Seite
