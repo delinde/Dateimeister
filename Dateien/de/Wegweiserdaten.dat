@@ -1,6 +1,6 @@
 
 ##<small>#############################################
-##   neu.Gutes-Deutsch.de
+##   Dateimeister
 ##         Anleitung:  hier ganz unten.
 ###############################################
 
@@ -12,25 +12,15 @@ Wegweiser
 - - Sache2
 - - UntersachenA1
 - - - Sache1
-- - - Sache122
-- - - - Sache123
-- - - -Lalala
 - SachenB
 - - Sache1
-- - Sache2
+- SachenC
 
-## - - - andereNetzseiten              andere Netzseiten
-## - - - - Buecher                     Bücher
-## - - - - - BuecherUeberMaerchen      Bücher über Märchen
-## - - - - - Woerterbuecher            Wörterbücher
-## - - - - - andereBuecher             andere Bücher
-## - - Mitmachen
-## - - Ziel                              Ziel    ##  dieser Sammlung
 - Herausgeber
  - - Bauhof
 - - - ueberDateimeister    Über den Dateimeister
 - - - Kurzanleitung
-- - - Wegweiserdaten.dat    Wegweiser
+- - - Wegweiserdaten.dat    Wegweiserdaten
 - - - NichtGefunden         Nicht gefunden
 
  

@@ -1,0 +1,13 @@
+## Stammdateien.dat  –  Dateien für ein neues Dateimeister-Projekt
+## dateimeister.sh liest diese Datei; Einträge ohne Endung werden .htm ergänzt.
+## Projektdaten.dat und Wegweiserdaten.dat werden von dateimeister.sh erzeugt.
+
+Willkommen
+Herausgeber
+Sachen_A
+Sache_A1
+Sachen_B
+Bauhof
+Stammdateien.dat
+NichtGefunden
+UeberDateimeister

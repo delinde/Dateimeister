@@ -1,0 +1,16 @@
+## Wegweiserdaten.dat  --  Vorlage fuer neue Dateimeister-Projekte
+## Anleitung: Einrueckung mit '- ' je Ebene.
+## Anzeigename nach mindestens 2 Leerzeichen vom Dateinamen trennen.
+
+Wegweiser
+- Willkommen
+- Sachen_A    Sachen A
+- - Sache_A1    Sache A.1
+- Sachen_B    Sachen B
+- Herausgeber
+- - Bauhof
+- - - Projektdaten.dat    Projektdaten
+- - - Wegweiserdaten.dat    Wegweiserdaten
+- - - Stammdateien.dat    Stammdateien
+- - - NichtGefunden    Nicht gefunden
+- - - UeberDateimeister    Ueber Dateimeister

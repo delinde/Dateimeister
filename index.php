@@ -23,10 +23,11 @@ require_once "Verfahren.php";        //   ???   >>>
 
 ##  Projektdaten aus  Projektdaten.dat  lesen und als globale Variablen bereitstellen.
 ##  Sie stehen danach in  dieSeite.htm  als  $Projektname,  $Projektname2,  $ProjektURL  zur Verfügung.
-$_pd        = leseProjektdaten();
-$Projektname  = $_pd['Projektname']  ?? 'Mein Projekt';
-$Projektname2 = $_pd['Projektname2'] ?? '';
-$ProjektURL   = $_pd['ProjektURL']   ?? '';
+$_pd        = leseProjektdaten('Dateien/de/Projektdaten.dat');
+$Projektname  = $_pd['Titel']        ?? $_pd['Projektname']  ?? 'Mein Projekt';
+$Projektname2 = $_pd['Untertitel']   ?? $_pd['Projektname2'] ?? '';
+$_domain      = $_pd['Domain'] ?? '';
+$ProjektURL   = $_pd['ProjektURL']   ?? ($_domain ? 'https://' . $_domain . '/' : '');
 
 
 $Sendgroeszen = preg_split(",\?,", $_SERVER["REQUEST_URI"]);
@@ -239,6 +240,17 @@ if (!$was_pfadpraefix) {
     }
 } else {
     $was_Datei = holeDatei($was_holDatei);
+}
+// Seitenname in NichtGefunden-Meldung einfügen
+if (strpos((string)$was_Datei, 'nicht gefunden') !== false) {
+    $angefragt = basename(rawurldecode(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH)));
+    if ($angefragt && strcasecmp($angefragt, 'NichtGefunden') !== 0) {
+        $was_Datei = str_replace(
+            'gesuchte Seite wurde',
+            'gesuchte Seite «' . htmlspecialchars($angefragt) . '» wurde',
+            $was_Datei
+        );
+    }
 }
        Echonn("(9) \$was_Datei <i>(Inhalt):</i>  <hr>$was_Datei<hr>");
 

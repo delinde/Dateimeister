@@ -21,6 +21,7 @@ Wegweiserdaten.dat   >  $Zeilen
 
 $WwWortlaut    = "Dateien/de/Wegweiserdaten.dat";
 $Zeilen        = file($WwWortlaut);
+$Verweise      = [];
 $Eltern        = array();
 $Tiefe         = -1;
 $WwKg          =  0;
@@ -114,7 +115,8 @@ function Ahnen($name)   {     //  zeigt eine Liste der übergeordneten Wegweiser
 #------- ==========
 function array_feld($liste, $feld1, $feld2)   {     // zieht aus   $Liste   die Spalten  $feld1  und   $feld2  heraus
 #------- ==========
-  $feldliste1 = array_column($liste, $feld2);         
+  $feldliste2 = [];
+  $feldliste1 = array_column($liste, $feld2);
 	foreach ($feldliste1 as $kg => $fld1)    {
 	  $feldliste2[$liste[$kg][$feld1]] = $feldliste1[$kg];   }
   return $feldliste2;
@@ -197,6 +199,7 @@ function baueWegweiserFuerGeschwisterNr($forenkG) {
         $_dateiDa   = file_exists("Dateien/de/$gname")
                    || file_exists("Dateien/de/$gname.htm")
                    || file_exists("Dateien/de/$gname.dat")
+                   || _sucheInUnterordnern("Dateien/de", "$gname")
                    || _sucheInUnterordnern("Dateien/de", "$gname.htm")
                    || _sucheInUnterordnern("Dateien/de", "$gname.dat")
                    || $hat_kinder;
@@ -268,6 +271,7 @@ function baueWegweiserFuerGeschwister($name)  {       ///    liefert eine Geschw
 		$_dateiDa = file_exists("Dateien/de/$gname")
 		         || file_exists("Dateien/de/$gname.htm")
 		         || file_exists("Dateien/de/$gname.dat")
+		         || _sucheInUnterordnern("Dateien/de", "$gname")
 		         || _sucheInUnterordnern("Dateien/de", "$gname.htm")
 		         || _sucheInUnterordnern("Dateien/de", "$gname.dat")
 		         || $_hatKinder;
