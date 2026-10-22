@@ -204,7 +204,7 @@ function holeDatei($dateiname,$endung=".htm")  {
         $pfadAttr  = htmlspecialchars($Dateipfad, ENT_QUOTES);
         $rueckAttr = htmlspecialchars($_SERVER['REQUEST_URI'] ?? '/', ENT_QUOTES);
         return "Datei nicht gefunden: <b>$pfadAnz</b>"
-             . "<br><form method='post' action='/erstelleDatei.php' style='margin-top:8px'>"
+             . "<br><form method='post' action='/DmSkripte/erstelleDatei.php' style='margin-top:8px'>"
              . "<input type='hidden' name='pfad' value='$pfadAttr'>"
              . "<input type='hidden' name='redirect' value='$rueckAttr'>"
              . "<button type='submit' style='padding:6px 18px;background:#446;color:#fff;"
