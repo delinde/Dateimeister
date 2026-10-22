@@ -18,7 +18,7 @@ if (!$pfad || strpos($pfad, '..') !== false) {
     http_response_code(400); exit('Ungültiger Pfad.');
 }
 
-$pfadReal  = realpath(__DIR__) . '/' . $pfad;
+$pfadReal  = realpath(__DIR__ . '/..') . '/' . $pfad;
 $basisReal = realpath(__DIR__ . '/../Dateien/de');
 
 if (!$basisReal || strpos($pfadReal, $basisReal . '/') !== 0) {

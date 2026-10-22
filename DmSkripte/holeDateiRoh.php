@@ -20,11 +20,11 @@ if (strpos($datei, '..') !== false) { http_response_code(403); exit('Ungültiger
 // Pfad-Auflösung: identisch mit holeDatei()
 $endung      = '.htm';
 if (preg_match(',\.(php|htm|dat)$,i', $datei)) $endung = '';
-$Dateipfad   = 'Dateien/' . $datei . $endung;
+$Dateipfad   = __DIR__ . '/../Dateien/' . $datei . $endung;
 
 // Unterordner-Suche (case-insensitiv) – wie in holeDatei()
 if (!file_exists($Dateipfad) && preg_match(',^([a-z]+)/(.+)$,i', $datei, $m)) {
-    $basis          = 'Dateien/' . $m[1];
+    $basis          = __DIR__ . '/../Dateien/' . $m[1];
     $rest           = $m[2];
     $dateiBasename  = basename($rest) . $endung;
     if (strpos($rest, '/') !== false) {
