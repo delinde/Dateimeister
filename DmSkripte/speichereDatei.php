@@ -25,10 +25,10 @@ if (strpos($pfad, '..') !== false) { http_response_code(403); exit('Ungültiger 
 // Dieselbe Pfad-Auflösung wie holeDatei() / holeDateiRoh.php
 $endung     = '.htm';
 if (preg_match(',\.(php|htm|dat)$,i', $pfad)) $endung = '';
-$Dateipfad  = __DIR__ . '/Dateien/' . $pfad . $endung;
+$Dateipfad  = __DIR__ . '/../Dateien/' . $pfad . $endung;
 
 if (!file_exists($Dateipfad) && preg_match(',^([a-z]+)/(.+)$,i', $pfad, $m)) {
-    $basis         = __DIR__ . '/Dateien/' . $m[1];
+    $basis         = __DIR__ . '/../Dateien/' . $m[1];
     $rest          = $m[2];
     $dateiBasename = basename($rest) . $endung;
     if (strpos($rest, '/') !== false) {
@@ -42,7 +42,7 @@ if (!file_exists($Dateipfad) && preg_match(',^([a-z]+)/(.+)$,i', $pfad, $m)) {
 }
 
 // Sicherheitscheck: nur Dateien/de/ darf beschrieben werden
-$basisReal = realpath(__DIR__ . '/Dateien/de');
+$basisReal = realpath(__DIR__ . '/../Dateien/de');
 $pfadReal  = realpath($Dateipfad);
 
 if (!$pfadReal || !$basisReal || strpos($pfadReal, $basisReal) !== 0) {

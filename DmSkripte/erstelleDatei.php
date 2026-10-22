@@ -19,7 +19,7 @@ if (!$pfad || strpos($pfad, '..') !== false) {
 }
 
 $pfadReal  = realpath(__DIR__) . '/' . $pfad;
-$basisReal = realpath(__DIR__ . '/Dateien/de');
+$basisReal = realpath(__DIR__ . '/../Dateien/de');
 
 if (!$basisReal || strpos($pfadReal, $basisReal . '/') !== 0) {
     http_response_code(403); exit('Außerhalb von Dateien/de/ nicht erlaubt.');

@@ -13,7 +13,7 @@
  *           https://…/pruefeStruktur.php  (Web – am besten per nginx auf localhost beschränken)
  */
 
-$basisDir     = __DIR__ . "/Dateien/de";
+$basisDir     = __DIR__ . "/../Dateien/de";
 $wegweiserDat = $basisDir . "/Wegweiserdaten.dat";
 $geruestDat   = __DIR__   . "/Geruestdateien.dat";
 

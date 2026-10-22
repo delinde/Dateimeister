@@ -38,7 +38,7 @@ if (!file_exists($Dateipfad) && preg_match(',^([a-z]+)/(.+)$,i', $datei, $m)) {
 }
 
 // Sicherheitscheck: nur Dateien/de/ darf ausgeliefert werden
-$basisReal = realpath(__DIR__ . '/Dateien/de');
+$basisReal = realpath(__DIR__ . '/../Dateien/de');
 $pfadReal  = realpath($Dateipfad);
 
 if (!$pfadReal || !$basisReal || strpos($pfadReal, $basisReal) !== 0) {
