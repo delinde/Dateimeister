@@ -48,7 +48,7 @@
         clearTimeout(pvTimer);
         pvTimer = setTimeout(function () {
             var typ = /\.dat$/i.test(window.DM_Pfad || '') ? 'dat' : '';
-            ajax('POST', '/vorschau.php',
+            ajax('POST', '/DmSkripte/vorschau.php',
                  'dmm=' + encodeURIComponent(ta.value) + '&typ=' + typ,
                  function (st, txt) { if (st === 200) pv.innerHTML = txt; });
         }, 350);
@@ -142,7 +142,7 @@
         btnS.addEventListener('click', function () {
             btnS.disabled = true;
             msg.textContent = 'Speichere …';
-            ajax('POST', '/speichereDatei.php',
+            ajax('POST', '/DmSkripte/speichereDatei.php',
                  'dmm=' + encodeURIComponent(ta.value) +
                  '&pfad=' + encodeURIComponent(window.DM_Pfad),
                  function (st, txt) {
@@ -192,7 +192,7 @@
             btn.textContent = '…';
             btn.disabled = true;
             ajax('GET',
-                 '/holeDateiRoh.php?datei=' + encodeURIComponent(window.DM_Pfad),
+                 '/DmSkripte/holeDateiRoh.php?datei=' + encodeURIComponent(window.DM_Pfad),
                  null,
                  function (st, txt, xhr) {
                      if (st === 200) {

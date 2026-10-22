@@ -18,7 +18,7 @@
 ##############################################################
 
 //**/  phpinfo(); 
-require_once "Verfahren.php";        //   ???   >>>
+require_once "DmSkripte/Verfahren.php";
 //  require_once "Verweise.php";
 
 ##  Projektdaten aus  Projektdaten.dat  lesen und als globale Variablen bereitstellen.
@@ -158,7 +158,7 @@ if ($wasalles == "")     ////   wenn nix angegeben ist, dann "Willkommen"
 ## Hier an dieser Stelle gilt es nun, den 
 ##             W e g w e i s e r   t e i l w e i s e  zu bauen, damit    nicedit, Nicedit und NicEdit   auseinandergehalten werden können.
 ## # # # # # # 
-require("Wegweisermeister.php");     //    Dort wird   Wegweisermeister.dat   eingelesen.                                                          
+require("DmSkripte/Wegweisermeister.php");                                                          
 
 
 /**/   Echonn("(2.1) Sprache: <b>$Sprache</b>; " . /*  was: <b>" . $was .*/  "</b> wasalles:<b> " . $wasalles . "</b>");
@@ -264,7 +264,7 @@ if ($was_holDatei
     ## Keine doppelten Anführungszeichen im JS nötig → kein Escaping für eval
     $pfadJS = str_replace("'", "\\'", $was_holDatei);
     $DM_EditorScript = "<script>var DM_Pfad='$pfadJS';</script>"
-                     . "<script src='/editor.js?v=" . filemtime(__DIR__ . '/editor.js') . "'></script>";
+                     . "<script src='/DmSkripte/editor.js?v=" . filemtime(__DIR__ . '/DmSkripte/editor.js') . "'></script>";
 }
 
 $wasTitel  = $was_DName;
@@ -319,7 +319,7 @@ $ii = 0;
 ### # # # # # # # #
    // *******************   Ww    *******************************
    // *******************   Wegweweiserbau     ******************
-//   require("Wegweisermeister.php");     //    Dort wird   Wegweisermeister.dat   eingelesen.
+//   require("DmSkripte/Wegweisermeister.php");
 
    $wasalles_Liste = $was_DName_Nr >= 0 ? AhnenVonNr($was_DName_Nr) : Ahnen($was_DName);
  
